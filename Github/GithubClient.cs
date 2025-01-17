@@ -23,9 +23,10 @@ public partial class GithubClient
 
     public async Task<Dictionary<char, long>> FetchLetterFrequencyFromRepositoryAsync(
         string repositoryOwner,
-        string repositoryName)
+        string repositoryName,
+        string branchName)
     {
-        var files = await GetRepositoryFilesRecursivelyAsync(repositoryOwner, repositoryName);
+        var files = await GetRepositoryFilesRecursivelyAsync(repositoryOwner, repositoryName, branchName);
 
         var letterCounts = new Dictionary<char, long>();
 
@@ -46,9 +47,10 @@ public partial class GithubClient
 
     private async Task<List<GithubTreeNode>> GetRepositoryFilesRecursivelyAsync(
         string repositoryOwner,
-        string repositoryName)
+        string repositoryName,
+        string branchName)
     {
-        var url = $"{GithubApiBaseUrl}/repos/{repositoryOwner}/{repositoryName}/git/trees/main?recursive=1";
+        var url = $"{GithubApiBaseUrl}/repos/{repositoryOwner}/{repositoryName}/git/trees/{branchName}?recursive=1";
 
         var response = await httpClient.GetAsync(url);
 

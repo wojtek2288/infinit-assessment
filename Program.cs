@@ -8,6 +8,7 @@ internal class Program
 {
     private const string RepositoryOwner = "lodash";
     private const string RepositoryName = "lodash";
+    private const string BranchName = "main";
 
     private static async Task Main(string[] args)
     {
@@ -21,7 +22,8 @@ internal class Program
 
         var letterFrequency = await githubClient.FetchLetterFrequencyFromRepositoryAsync(
             RepositoryOwner,
-            RepositoryName);
+            RepositoryName,
+            BranchName);
 
         Console.WriteLine("Letter Frequency (Descending):");
 

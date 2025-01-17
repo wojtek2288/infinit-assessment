@@ -42,4 +42,4 @@ Execution Time: 00:00:01.7571887
 
 ## Customization
 
-To analyze a different repository, modify the `RepositoryOwner` and `RepositoryName` constants in `Program.cs`.
+To analyze a different repository, modify the `RepositoryOwner`, `RepositoryName` and `BranchName` constants in `Program.cs`.
