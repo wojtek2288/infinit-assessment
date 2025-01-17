@@ -1,8 +1,8 @@
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using Infinit.Assessment.Extensions;
 using Infinit.Assessment.Github.Responses;
-using Infinit.Assessment.Helpers;
 
 namespace Infinit.Assessment.Github;
 
@@ -36,7 +36,7 @@ public partial class GithubClient
 
             foreach (var content in contents)
             {
-                LetterCounter.AddCounts(content, letterCounts);
+                letterCounts.AddLetterCounts(content);
             }
         }
 

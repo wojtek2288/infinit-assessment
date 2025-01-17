@@ -1,8 +1,8 @@
-namespace Infinit.Assessment.Helpers;
+namespace Infinit.Assessment.Extensions;
 
-public static class LetterCounter
+public static class DictionaryExtensions
 {
-    public static void AddCounts(string content, Dictionary<char, long> letterCounts)
+    public static void AddLetterCounts(this Dictionary<char, long> letterCounts, string content)
     {
         foreach (var character in content.ToLower())
         {
@@ -11,7 +11,6 @@ public static class LetterCounter
                 if (!letterCounts.TryGetValue(character, out var value))
                 {
                     value = 0;
-                    letterCounts[character] = value;
                 }
 
                 letterCounts[character] = ++value;
