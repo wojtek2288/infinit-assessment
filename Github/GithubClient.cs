@@ -21,18 +21,23 @@ public partial class GithubClient
         this.httpClient = httpClient;
     }
 
+    /// <summary>
+    /// Fetches the frequency of letters from all js/ts files in a specified repository branch.
+    /// This method aggregates letter counts from file contents and returns them
+    /// as a sorted dictionary in descending order of frequency.
+    /// </summary>
     public async Task<Dictionary<char, long>> FetchLetterFrequencyFromRepositoryAsync(
         string repositoryOwner,
         string repositoryName,
         string branchName)
     {
-        var files = await GetRepositoryFilesRecursivelyAsync(repositoryOwner, repositoryName, branchName);
+        var paths = await GetRepositoryFilePathsRecursivelyAsync(repositoryOwner, repositoryName, branchName);
 
         var letterCounts = new Dictionary<char, long>();
 
-        foreach (var batch in files.Chunk(BatchSize))
+        foreach (var batch in paths.Chunk(BatchSize))
         {
-            var contents = await FetchFileContentsAsync(repositoryOwner, repositoryName, batch);
+            var contents = await GetFileContentsAsync(repositoryOwner, repositoryName, batch);
 
             foreach (var content in contents)
             {
@@ -45,7 +50,7 @@ public partial class GithubClient
             .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
     }
 
-    private async Task<List<GithubTreeNode>> GetRepositoryFilesRecursivelyAsync(
+    private async Task<List<GithubTreeNode>> GetRepositoryFilePathsRecursivelyAsync(
         string repositoryOwner,
         string repositoryName,
         string branchName)
@@ -66,7 +71,7 @@ public partial class GithubClient
             .ToList();
     }
 
-    private async Task<List<string>> FetchFileContentsAsync(
+    private async Task<List<string>> GetFileContentsAsync(
         string repositoryOwner,
         string repositoryName,
         IEnumerable<GithubTreeNode> files)
