@@ -1,8 +1,10 @@
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using Infinit.Assessment.Github.Responses;
+using Infinit.Assessment.Helpers;
 
-namespace Infinit.Assessment;
+namespace Infinit.Assessment.Github;
 
 public partial class GithubClient
 {

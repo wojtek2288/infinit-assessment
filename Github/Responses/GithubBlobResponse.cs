@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Infinit.Assessment;
+namespace Infinit.Assessment.Github.Responses;
 
 public class GithubBlobResponse
 {

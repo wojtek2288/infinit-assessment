@@ -1,4 +1,4 @@
-namespace Infinit.Assessment;
+namespace Infinit.Assessment.Helpers;
 
 public static class LetterCounter
 {
