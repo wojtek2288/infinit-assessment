@@ -38,7 +38,7 @@ internal class Program
 
     private static HttpClient PrepareGithubHttpClient(string[] args)
     {
-        var token = ReadGithubTokenFromArgs(args);
+        var token = ReadGithubTokenFromArgs();
 
         var httpClient = new HttpClient();
 
@@ -46,15 +46,15 @@ internal class Program
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("token", token);
 
         return httpClient;
-    }
 
-    private static string ReadGithubTokenFromArgs(string[] args)
-    {
-        if (args.Length != 1 || string.IsNullOrWhiteSpace(args[0]))
+        string ReadGithubTokenFromArgs()
         {
-            throw new ArgumentException("Usage: dotnet run <GitHubToken>");
-        }
+            if (args.Length != 1 || string.IsNullOrWhiteSpace(args[0]))
+            {
+                throw new ArgumentException("Usage: dotnet run <GitHubToken>");
+            }
 
-        return args[0];
+            return args[0];
+        }
     }
 }
