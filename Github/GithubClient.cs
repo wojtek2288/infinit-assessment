@@ -78,9 +78,7 @@ public partial class GithubClient
     {
         var tasks = files.Select(async file =>
         {
-            var url = $"{GithubApiBaseUrl}/repos/{repositoryOwner}/{repositoryName}/git/blobs/{file.Sha}";
-
-            var response = await httpClient.GetAsync(url);
+            var response = await httpClient.GetAsync(file.Url);
 
             response.EnsureSuccessStatusCode();
 
